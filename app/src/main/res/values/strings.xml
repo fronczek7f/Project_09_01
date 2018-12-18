@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Project_09_01</string>
+    <string name="send_broadcast">Send Broadcast</string>
+    <string name="send_ordered_broadcast">Send Ordered Broadcast</string>
+</resources>
