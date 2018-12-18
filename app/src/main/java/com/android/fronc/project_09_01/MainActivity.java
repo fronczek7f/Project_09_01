@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MyFeedbackReceiver myReceiver;
-    private IntentFilter mIntentFilter;
+//    private MyFeedbackReceiver myReceiver = new MyFeedbackReceiver();
 
     public final static String CUSTOM_EVENT = "com.android.fronc.project_09_01";
     public final static String EXTRA_EVENT_TEXT = "com.android.fronc.project_09_01.EXTRA_MESSAGE_TEXT";
@@ -21,19 +20,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myReceiver = new MyFeedbackReceiver();
-        mIntentFilter = new IntentFilter();
-        mIntentFilter.addAction("com.android.fronc.project_09_02");
-        registerReceiver(myReceiver, mIntentFilter);
+//        IntentFilter mIntentFilter = new IntentFilter(CUSTOM_EVENT);
+//        mIntentFilter.addAction("com.android.fronc.project_09_02");
+//        mIntentFilter.setPriority(1);
+//        registerReceiver(myReceiver, mIntentFilter);
     }
 
-    @Override
+    /*@Override
     public void onDestroy()
     {
         super.onDestroy();
         unregisterReceiver(myReceiver);
     }
-
+*/
     public void onClickSend(View view) {
         Toast.makeText(this, "Send simple broadcast", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
@@ -43,15 +42,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickSendOrdered(View view) {
-        Toast.makeText(this, "Send ordered broadcast", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent("com.android.fronc.project_09_01");
 
-        Intent intent = new Intent();
-        intent.setAction(CUSTOM_EVENT);
-        intent.putExtra(EXTRA_EVENT_TEXT, "sendBroadcastOrdered");
+        Bundle extras = new Bundle();
+        extras.putString("stringExtra", "Start");
 
-        Bundle initialExtras = new Bundle();
-        initialExtras.putString("INITIAL_STRING", "An extra initial string");
-
-        sendOrderedBroadcast(intent,null, new MyFeedbackReceiver(),null, Activity.RESULT_OK,null,initialExtras);
+        sendOrderedBroadcast(intent, null, new MyFeedbackReceiver(),
+                null, 0, "Start", extras);
     }
 }
