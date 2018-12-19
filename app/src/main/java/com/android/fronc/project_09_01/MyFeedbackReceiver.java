@@ -11,29 +11,30 @@ public class MyFeedbackReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
+        Handler handler = new Handler();
+
         int resultCode = getResultCode();
         String resultData = getResultData();
         Bundle resultExtras = getResultExtras(true);
-        String stringExtra = resultExtras.getString("stringExtra");
 
-        resultCode++;
-        stringExtra += "->SenderReceiver";
+        final String stringExtra = resultExtras.getString("stringExtra");
 
-        final String toastText = "SenderReceiver\n" +
-                "resultCode: " + resultCode + "\n" +
-                "resultData: " + resultData + "\n" +
-                "stringExtra: " + stringExtra;
-
-        Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Broadcast feedback detected", Toast.LENGTH_LONG).show();
             }
-        }, 12000);
+        }, 28000);
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Toast.makeText(context, "Feedback from all applications: " + stringExtra, Toast.LENGTH_LONG).show();
+            }
+        }, 32000);
 
         resultData = "SenderReceiver";
         resultExtras.putString("stringExtra", stringExtra);
 
+        resultCode++;
         setResult(resultCode, resultData, resultExtras);
     }
 
