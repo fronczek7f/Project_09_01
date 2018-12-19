@@ -1,8 +1,6 @@
 package com.android.fronc.project_09_01;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -42,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickSendOrdered(View view) {
+        Toast.makeText(this, "Send ordered broadcast", Toast.LENGTH_LONG).show();
         Intent intent = new Intent("com.android.fronc.project_09_01");
 
         Bundle extras = new Bundle();
